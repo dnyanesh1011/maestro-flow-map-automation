@@ -35,15 +35,12 @@ jobs:
       - name: Install Maestro
         run: npm install -g maestro-cli
 
-      # 5. Run Maestro tests on a specific Google Pixel emulator
-      - name: Run Tests on Google Pixel Emulator
+      # 5. Run Maestro tests on an Android emulator
+      - name: Run Tests on Android Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
           # Set the Android API level (Android 14)
           api-level: 34
-
-          # Set the hardware profile to a Google Pixel 4
-          profile: Pixel 4
 
           # Use a standard 64-bit image with Google APIs for best compatibility
           target: google_apis
