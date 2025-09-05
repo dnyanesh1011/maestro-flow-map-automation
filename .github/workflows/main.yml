@@ -9,8 +9,8 @@ on:
 # Defines the jobs to be performed
 jobs:
   run-android-tests:
-    # Use the latest Ubuntu virtual machine
-    runs-on: ubuntu-latest
+    # Use a macOS runner for hardware acceleration, which is crucial for emulators
+    runs-on: macos-latest
 
     # Sequence of steps to execute
     steps:
