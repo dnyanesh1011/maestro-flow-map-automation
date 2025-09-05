@@ -35,14 +35,20 @@ jobs:
       - name: Install Maestro
         run: npm install -g maestro-cli
 
-      # 5. Run Maestro Tests on an Android Emulator
-      # This action handles downloading the SDK, creating and starting an
-      # emulator, and then runs your test script against it.
-      - name: Run Maestro Test
+      # 5. Run Maestro tests on a specific Google Pixel emulator
+      - name: Run Tests on Google Pixel Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          # Specify the API level for the emulator
-          api-level: 33
-          
-          # The command to run once the emulator is booted and ready
+          # Set the Android API level (Android 14)
+          api-level: 34
+
+          # Set the hardware profile to a Google Pixel 4
+          profile: Pixel 4
+
+          # Use a standard 64-bit image with Google APIs for best compatibility
+          target: google_apis
+          arch: x86_64
+
+          # Your test command goes here.
+          # Make sure your APK and YAML file names are correct.
           script: maestro test --app-file google_map_app.apk Google_Maps_test.yaml
