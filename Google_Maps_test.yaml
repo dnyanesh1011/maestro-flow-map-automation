@@ -1,0 +1,41 @@
+appId: com.google.android.apps.maps
+---
+- launchApp:
+    clearState: true
+
+- tapOn: 'Search here' # Tap on the search box
+- inputText: 'Taj Mahal' # Enter place name
+
+- tapOn:
+    id: 'compass_container'
+
+- tapOn:
+    id: 'header'
+
+# --- Scroll until "Add review" button is visible ---
+- repeat:
+    while:
+      notVisible:
+        id: 'com.google.android.apps.maps:id/star4' # Keep scrolling until this ID appears
+    commands:
+      - swipe:
+          direction: UP
+          duration: 300 # adjust for speed; shorter = faster
+
+- tapOn:
+    id: 'star4'
+
+- tapOn: 'Weekend'
+
+- tapOn: '30–60 min'
+
+- tapOn:
+    id: 'floatingBottomPostButton'
+
+- tapOn: 'Close'
+
+- tapOn:
+    id: 'mod_app_bar_button_icon'
+
+- tapOn:
+    id: 'search_omnibox_text_clear'
