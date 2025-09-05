@@ -1,0 +1,40 @@
+# Name of your automated workflow
+name: Run Maestro Tests
+
+# Trigger: runs on a push to the main branch
+on:
+  push:
+    branches: [ "main" ]
+
+# Defines the jobs to be performed
+jobs:
+  run-android-tests:
+    # Use the latest Ubuntu virtual machine
+    runs-on: ubuntu-latest
+
+    # Sequence of steps to execute
+    steps:
+      # 1. Checks out your repository code
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # 2. Sets up Java (required for Android)
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 3. Sets up Node.js (to install Maestro)
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 4. Installs the Maestro CLI
+      - name: Install Maestro
+        run: npm install -g maestro-cli
+
+      # 5. Run the Maestro test using YOUR file names
+      - name: Run Maestro Test
+        run: maestro test --app-file google_map_app.apk Google_Maps_test.yaml
