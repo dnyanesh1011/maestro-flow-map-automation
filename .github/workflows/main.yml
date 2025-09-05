@@ -9,7 +9,7 @@ on:
 # Defines the jobs to be performed
 jobs:
   run-android-tests:
-    # Use a macOS runner for hardware acceleration, which is crucial for emulators
+    # Use a macOS runner for hardware acceleration
     runs-on: macos-latest
 
     # Sequence of steps to execute
@@ -42,10 +42,11 @@ jobs:
           # Set the Android API level (Android 14)
           api-level: 34
 
-          # Use a standard 64-bit image with Google APIs for best compatibility
+          # Use Google APIs for best compatibility
           target: google_apis
-          arch: x86_64
 
-          # Your test command goes here.
-          # Make sure your APK and YAML file names are correct.
+          # Match the emulator architecture to the ARM64 runner
+          arch: arm64-v8a
+
+          # Your test command goes here
           script: maestro test --app-file google_map_app.apk Google_Maps_test.yaml
