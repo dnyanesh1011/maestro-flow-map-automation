@@ -9,7 +9,7 @@ on:
 # Defines the jobs to be performed
 jobs:
   run-android-tests:
-    # Use a macOS runner for hardware acceleration
+    # Use a macOS runner for the best available performance
     runs-on: macos-latest
 
     # Sequence of steps to execute
@@ -39,17 +39,15 @@ jobs:
       - name: Run Tests on Android Emulator
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          # Set the Android API level (Android 14)
           api-level: 34
-
-          # Use Google APIs for best compatibility
           target: google_apis
-
-          # Match the emulator architecture to the ARM64 runner
           arch: arm64-v8a
           
-          # Disable hardware acceleration to fix HVF error
+          # Increase the boot timeout to 20 minutes (1200 seconds)
+          emulator-boot-timeout: 1200
+          
+          # Add -accel off to disable hardware acceleration
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -accel off
 
-          # Your test command pointing to the files in the root directory
+          # Your test command
           script: maestro test --app-file google_map_app.apk Google_Maps_test.yaml
