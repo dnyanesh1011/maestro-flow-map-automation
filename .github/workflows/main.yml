@@ -48,8 +48,8 @@ jobs:
           # Match the emulator architecture to the ARM64 runner
           arch: arm64-v8a
           
-          # Add -accel off to disable hardware acceleration, fixing the HVF error
+          # Disable hardware acceleration to fix HVF error
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -accel off
 
-          # Your test command goes here
+          # Your test command pointing to the files in the root directory
           script: maestro test --app-file google_map_app.apk Google_Maps_test.yaml
